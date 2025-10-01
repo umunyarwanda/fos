@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: "EB Garamond", serif;
+  --font-secondary: "Poppins", sans-serif;
+  --font-tertiary: "Lato", serif;
+
+  /* Color */
+  --color-theme-clr: #e6a11f;
+}
+
+html,
+body {
+  @apply font-secondary;
+  overflow-x: hidden;
+  /* background: url('./assets/cover-image1.png');
+  background-attachment: fixed; */
+  /* @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  } */
+}
+
+.table-button {
+  @apply flex outline-none border-none items-center gap-2 !bg-sky-700 !text-white px-3 !py-1 !text-[15px] rounded-md hover:opacity-50 font-secondary;
+}
+
+.table-button-danger {
+  @apply !bg-red-600;
+}
+
+.table-button-success {
+  @apply !bg-teal-600;
+}
+
+.table-button-approve {
+  @apply !bg-emerald-600;
+}
+
+.table-button-edit {
+  @apply !bg-emerald-600;
+}
+
+.table-button-reject {
+  @apply !bg-rose-600;
+}
+
+.table-button-icon {
+  @apply !size-5 !text-white;
+}
+
+/* Members table styling */
+.members-table .ant-table-thead > tr > th {
+  @apply bg-gray-50 font-semibold text-gray-700 border-b-2 border-gray-200;
+}
+
+.members-table .ant-table-tbody > tr > td {
+  @apply border-b border-gray-100;
+}
+
+.members-table .ant-table-tbody > tr:hover > td {
+  @apply bg-gray-50;
+}
+
+.members-table .ant-table-pagination {
+  @apply px-6 py-4;
+}
+
+.members-table .ant-table-pagination .ant-pagination-item {
+  @apply border-gray-300;
+}
+
+.members-table .ant-table-pagination .ant-pagination-item-active {
+  @apply bg-theme-clr border-theme-clr;
+}
+
+.members-table .ant-table-pagination .ant-pagination-item-active a {
+  @apply text-white;
+}
+
+.members-table .ant-table-pagination .ant-pagination-prev,
+.members-table .ant-table-pagination .ant-pagination-next {
+  @apply border-gray-300;
+}
+
+.members-table .ant-table-pagination .ant-pagination-prev:hover,
+.members-table .ant-table-pagination .ant-pagination-next:hover {
+  @apply border-theme-clr text-theme-clr;
+}
+
+/* Videos table styling */
+.videos-table .ant-table-thead > tr > th {
+  @apply bg-gray-50 font-semibold text-gray-700 border-b-2 border-gray-200;
+}
+
+.videos-table .ant-table-tbody > tr > td {
+  @apply border-b border-gray-100;
+}
+
+.videos-table .ant-table-tbody > tr:hover > td {
+  @apply bg-gray-50;
+}
+
+.videos-table .ant-table-pagination {
+  @apply px-6 py-4;
+}
+
+.videos-table .ant-table-pagination .ant-pagination-item {
+  @apply border-gray-300;
+}
+
+.videos-table .ant-table-pagination .ant-pagination-item-active {
+  @apply bg-theme-clr border-theme-clr;
+}
+
+.videos-table .ant-table-pagination .ant-pagination-item-active a {
+  @apply text-white;
+}
+
+.videos-table .ant-table-pagination .ant-pagination-prev,
+.videos-table .ant-table-pagination .ant-pagination-next {
+  @apply border-gray-300;
+}
+
+.videos-table .ant-table-pagination .ant-pagination-prev:hover,
+.videos-table .ant-table-pagination .ant-pagination-next:hover {
+  @apply border-theme-clr text-theme-clr;
+}
