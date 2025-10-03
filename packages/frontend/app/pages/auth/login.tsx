@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router'
 import Logo from '~/assets/logo-dark.png'
 import CoverImage1 from '~/assets/cover-image1.png'
+import { useAuth } from '~/contexts/AuthContext'
 import type { Route } from '../+types'
 
 export function meta({}: Route.MetaArgs) {
@@ -14,12 +15,19 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Login() {
+  const { login, isLoading, isAuthenticated } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  // Redirect if already authenticated
+  if (isAuthenticated) {
+    window.location.href = '/dashboard'
+    return null
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -31,14 +39,13 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
+    setError('')
     
-    // Simulate login
-    setTimeout(() => {
-      setIsLoading(false)
-      // Redirect to dashboard
-      window.location.href = '/dashboard'
-    }, 2000)
+    try {
+      await login(formData)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Login failed. Please try again.')
+    }
   }
 
   const features = [
@@ -146,6 +153,13 @@ export default function Login() {
                 </div>
               </div>
             </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
 
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">

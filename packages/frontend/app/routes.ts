@@ -8,6 +8,7 @@ export default [
     route("/upcoming-events", "pages/site/events/upcoming.tsx"),
     route("/past-events", "pages/site/events/past.tsx"),
     route("/special-programs", "pages/site/events/special-programs.tsx"),
+    route("/special-program/:id", "pages/site/special-program-detail.tsx"),
     route("/event/:id", "pages/site/event-detail.tsx"),
     route('/our-schedule', "pages/site/schedule.tsx"),
     route("/commissions", "pages/site/commissions.tsx"),
@@ -25,6 +26,7 @@ export default [
     route("/dashboard/members", "pages/dashboard/members.tsx"),
     route("/dashboard/videos", "pages/dashboard/videos.tsx"),
     route("/dashboard/analytics", "pages/dashboard/analytics.tsx"),
-    route("/dashboard/settings", "pages/dashboard/settings.tsx")
+    route("/dashboard/settings", "pages/dashboard/settings.tsx"),
+    route("/dashboard/special-programs", "pages/dashboard/special-programs.tsx")
   ])
 ] satisfies RouteConfig;

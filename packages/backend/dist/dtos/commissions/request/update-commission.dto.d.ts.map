@@ -1,0 +1,1 @@
+{"version":3,"file":"update-commission.dto.d.ts","sourceRoot":"","sources":["../../../../src/dtos/commissions/request/update-commission.dto.ts"],"names":[],"mappings":"AAEA,qBAAa,mBAAmB;IAI9B,KAAK,CAAC,EAAE,MAAM,CAAC;IAIf,WAAW,CAAC,EAAE,MAAM,CAAC;IAKrB,MAAM,CAAC,EAAE,MAAM,CAAC;IAIhB,QAAQ,CAAC,EAAE,MAAM,CAAC;IAKlB,UAAU,CAAC,EAAE,MAAM,EAAE,CAAC;CACvB"}

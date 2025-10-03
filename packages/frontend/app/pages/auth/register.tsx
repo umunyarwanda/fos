@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router'
 import Logo from '~/assets/logo-dark.png'
 import CoverImage2 from '~/assets/cover-image2.png'
+import { useAuth } from '~/contexts/AuthContext'
 import type { Route } from '../+types'
 
 export function meta({}: Route.MetaArgs) {
@@ -14,19 +15,26 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Register() {
+  const { register, isLoading, isAuthenticated } = useAuth()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    username: '',
     phone: '',
     password: '',
-    confirmPassword: '',
-    role: 'member'
+    confirmPassword: ''
   })
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [agreedToTerms, setAgreedToTerms] = useState(false)
+  const [error, setError] = useState('')
+
+  // Redirect if already authenticated
+  if (isAuthenticated) {
+    window.location.href = '/dashboard'
+    return null
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -38,14 +46,33 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
+    setError('')
     
-    // Simulate registration
-    setTimeout(() => {
-      setIsLoading(false)
-      // Redirect to dashboard
-      window.location.href = '/dashboard'
-    }, 2000)
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match')
+      return
+    }
+    
+    // Validate terms agreement
+    if (!agreedToTerms) {
+      setError('Please agree to the terms and conditions')
+      return
+    }
+    
+    try {
+      await register({
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phone: formData.phone || undefined
+      })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Registration failed. Please try again.')
+    }
   }
 
   const benefits = [
@@ -148,6 +175,28 @@ export default function Register() {
               </div>
             </div>
 
+            {/* Username Field */}
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
+                Username
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-clr focus:border-transparent transition-colors"
+                  placeholder="Choose a username"
+                />
+              </div>
+            </div>
+
             {/* Phone Field */}
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
@@ -169,24 +218,12 @@ export default function Register() {
               </div>
             </div>
 
-            {/* Role Selection */}
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-2">
-                Role in Choir
-              </label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleInputChange}
-                className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-clr focus:border-transparent transition-colors"
-              >
-                <option value="member">Choir Member</option>
-                <option value="conductor">Conductor</option>
-                <option value="admin">Administrator</option>
-                <option value="volunteer">Volunteer</option>
-              </select>
-            </div>
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
 
             {/* Password Fields */}
             <div className="grid grid-cols-1 gap-4">

@@ -16,6 +16,7 @@ export class AuthController {
    *   post:
    *     summary: Register a new user
    *     tags: [Authentication]
+   *     security: []  # Public endpoint - no auth required
    *     requestBody:
    *       required: true
    *       content:
@@ -134,6 +135,7 @@ export class AuthController {
    *   post:
    *     summary: Login user
    *     tags: [Authentication]
+   *     security: []  # Public endpoint - no auth required
    *     requestBody:
    *       required: true
    *       content:

@@ -1,0 +1,40 @@
+export interface ICreateSpecialProgramReqDto {
+  title: string;
+  subtitle?: string;
+  description: string;
+  startDate: string; // ISO date string
+  endDate: string; // ISO date string
+  startTime: string;
+  endTime: string;
+  location: string;
+  address?: string;
+  capacity: number;
+  monthlyTuition: number;
+  minAge: number;
+  maxAge: number;
+  isFeatured?: boolean;
+  tags?: string[];
+  galleryImages?: string[];
+  instructors?: Array<{
+    name: string;
+    title: string;
+    subtitle: string;
+    role: string;
+    qualifications: string;
+    experience: string;
+    image: string;
+  }>;
+  curriculum?: Array<{
+    phase: string;
+    duration: string;
+    description: string;
+    skills: string[];
+  }>;
+  whatsIncluded?: string[];
+  schedule?: Array<{
+    day: string;
+    startTime: string;
+    endTime: string;
+    activity: string;
+  }>;
+}

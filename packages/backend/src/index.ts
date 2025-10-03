@@ -8,7 +8,15 @@ import swaggerUi from 'swagger-ui-express';
 import { initializeDatabase } from './config/database';
 import { swaggerSpec } from './config/swagger';
 import userRoutes from './routes/userRoutes';
+import eventRoutes from './routes/eventRoutes';
+import specialProgramRoutes from './routes/specialProgramRoutes';
+import scheduleRoutes from './routes/scheduleRoutes';
+import commissionRoutes from './routes/commissionRoutes';
+import bookingRoutes from './routes/bookingRoutes';
+import contactRoutes from './routes/contactRoutes';
 import authRoutes from './routes/authRoutes';
+import uploadRoutes from './routes/upload.routes';
+import { SCHEDULES_URL, EVENTS_URL, USERS_URL, SPECIAL_PROGRAMS_URL, COMMISSIONS_URL, BOOKINGS_URL, CONTACTS_URL, AUTH_URL, UPLOAD_URL } from './shared/variables/urls';
 
 // Load environment variables
 dotenv.config();
@@ -32,8 +40,15 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/users', userRoutes);
-app.use('/api/auth', authRoutes);
+app.use(USERS_URL.BASE, userRoutes);
+app.use(EVENTS_URL.BASE, eventRoutes);
+app.use(SPECIAL_PROGRAMS_URL.BASE, specialProgramRoutes);
+app.use(SCHEDULES_URL.BASE, scheduleRoutes);
+app.use(COMMISSIONS_URL.BASE, commissionRoutes);
+app.use(BOOKINGS_URL.BASE, bookingRoutes);
+app.use(CONTACTS_URL.BASE, contactRoutes);
+app.use(AUTH_URL.BASE, authRoutes);
+app.use(UPLOAD_URL.BASE, uploadRoutes);
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {

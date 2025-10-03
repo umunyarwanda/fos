@@ -22,8 +22,11 @@ import {
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from '~/assets/logo-dark.png'
 import { ConfigProvider } from 'antd'
+import { useAuth } from '~/contexts/AuthContext'
+import { ProtectedRoute } from '~/components/ProtectedRoute'
 
 function DashboardLayout() {
+  const { user, logout } = useAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const location = useLocation()
@@ -45,24 +48,24 @@ function DashboardLayout() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    navigate('/login')
+    logout()
   }
 
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: 'var(--color-theme-clr)',
+    <ProtectedRoute>
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              colorPrimary: 'var(--color-theme-clr)',
+            },
           },
-        },
-        token: {
-          fontFamily: 'Poppins, sans-serif',
-        }
-      }}
-    >
-    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
+          token: {
+            fontFamily: 'Poppins, sans-serif',
+          }
+        }}
+      >
+      <div className="min-h-screen bg-gray-50 flex overflow-hidden">
       {/* Mobile sidebar overlay */}
       <AnimatePresence>
         {sidebarOpen && (
@@ -283,7 +286,9 @@ function DashboardLayout() {
                   <div className="w-8 h-8 bg-theme-clr rounded-full flex items-center justify-center">
                     <User className="w-4 h-4 text-black" />
                   </div>
-                  <span className="hidden sm:block text-sm font-medium text-gray-700">John Doe</span>
+                  <span className="hidden sm:block text-sm font-medium text-gray-700">
+                    {user ? `${user.firstName} ${user.lastName}` : 'User'}
+                  </span>
                   <ChevronDown className="w-4 h-4 text-gray-400" />
                 </button>
 
@@ -316,7 +321,7 @@ function DashboardLayout() {
                       <button
                         onClick={() => {
                           setUserMenuOpen(false)
-                          // Handle logout
+                          handleLogout()
                         }}
                         className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left"
                       >
@@ -336,8 +341,9 @@ function DashboardLayout() {
           <Outlet />
         </main>
       </div>
-    </div>
-    </ConfigProvider>
+      </div>
+      </ConfigProvider>
+    </ProtectedRoute>
   )
 }
 
