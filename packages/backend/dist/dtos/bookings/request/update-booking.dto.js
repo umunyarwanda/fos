@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateBookingDto = void 0;
 const class_validator_1 = require("class-validator");
-const Booking_1 = require("../../../../entities/Booking");
+const EBooking_enum_1 = require("../../../shared/enum/EBooking.enum");
 class UpdateBookingDto {
 }
 exports.UpdateBookingDto = UpdateBookingDto;
@@ -50,8 +49,8 @@ __decorate([
 ], UpdateBookingDto.prototype, "eventDate", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(Booking_1.Duration, { message: 'Please select a valid duration' }),
-    __metadata("design:type", typeof (_a = typeof Booking_1.Duration !== "undefined" && Booking_1.Duration) === "function" ? _a : Object)
+    (0, class_validator_1.IsEnum)(EBooking_enum_1.Duration, { message: 'Please select a valid duration' }),
+    __metadata("design:type", String)
 ], UpdateBookingDto.prototype, "duration", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
@@ -72,7 +71,12 @@ __decorate([
 ], UpdateBookingDto.prototype, "customEventType", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(Booking_1.BookingStatus, { message: 'Please select a valid booking status' }),
-    __metadata("design:type", typeof (_b = typeof Booking_1.BookingStatus !== "undefined" && Booking_1.BookingStatus) === "function" ? _b : Object)
+    (0, class_validator_1.IsEnum)(EBooking_enum_1.BookingStatus, { message: 'Please select a valid booking status' }),
+    __metadata("design:type", String)
 ], UpdateBookingDto.prototype, "status", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)({}, { message: 'Please provide a valid date in ISO format' }),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "confirmedAt", void 0);
 //# sourceMappingURL=update-booking.dto.js.map

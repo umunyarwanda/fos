@@ -1,6 +1,6 @@
-import { ERecurrencePattern } from '@/shared/enum/ERecurrencePattern.enum';
-import { EEventType } from '@/shared/enum/EEventType.enum';
-import { EScheduleStatus } from '@/shared/enum/EScheduleStatus.enum';
+import { ERecurrencePattern } from '../shared/enum/ERecurrencePattern.enum';
+import { EEventType } from '../shared/enum/EEventType.enum';
+import { EScheduleStatus } from '../shared/enum/EScheduleStatus.enum';
 export declare class Schedule {
     id: number;
     title: string;

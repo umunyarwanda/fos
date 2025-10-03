@@ -2,29 +2,29 @@ import { Expose, Type } from 'class-transformer';
 
 export class EventResponseDto {
   @Expose()
-  id: number;
+  id!: number;
 
   @Expose()
-  title: string;
+  title!: string;
 
   @Expose()
   subtitle?: string;
 
   @Expose()
-  description: string;
+  description!: string;
 
   @Expose()
   @Type(() => Date)
-  eventDate: Date;
+  eventDate!: Date;
 
   @Expose()
-  startTime: string;
+  startTime!: string;
 
   @Expose()
   endTime?: string;
 
   @Expose()
-  location: string;
+  location!: string;
 
   @Expose()
   address?: string;
@@ -33,10 +33,10 @@ export class EventResponseDto {
   capacity?: number;
 
   @Expose()
-  isActive: boolean;
+  isActive!: boolean;
 
   @Expose()
-  isFeatured: boolean;
+  isFeatured!: boolean;
 
   @Expose()
   tags?: string[];
@@ -54,16 +54,16 @@ export class EventResponseDto {
   }>;
 
   @Expose()
-  venueType: 'indoor' | 'outdoor';
+  venueType!: 'indoor' | 'outdoor';
 
   @Expose()
   organizerId?: number;
 
   @Expose()
   @Type(() => Date)
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => Date)
-  updatedAt: Date;
+  updatedAt!: Date;
 }

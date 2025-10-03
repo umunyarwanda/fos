@@ -19,6 +19,7 @@ export declare class Commission {
     description?: string;
     amount: number;
     duration?: string;
+    coverImage?: string;
     inclusions?: string[];
     bookings?: Booking[];
     createdAt: Date;

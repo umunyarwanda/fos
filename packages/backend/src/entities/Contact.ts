@@ -37,12 +37,8 @@ export class Contact {
   @Column({ type: 'varchar', length: 20, nullable: true })
   phoneNumber?: string;
 
-  @Column({ 
-    type: 'enum', 
-    enum: ContactSubject,
-    default: ContactSubject.GENERAL_INQUIRY 
-  })
-  subject!: ContactSubject;
+  @Column()
+  subject!: string;
 
   @Column({ type: 'text' })
   message!: string;

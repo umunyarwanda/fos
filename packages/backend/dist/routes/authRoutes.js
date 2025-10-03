@@ -8,8 +8,9 @@ const auth_controller_1 = require("../controllers/auth.controller");
 const validation_middleware_1 = require("../middleware/validation.middleware");
 const login_dto_1 = require("../dtos/auth/request/login.dto");
 const register_dto_1 = require("../dtos/auth/request/register.dto");
+const urls_1 = require("../shared/variables/urls");
 const router = express_1.default.Router();
-router.post('/register', (0, validation_middleware_1.validateDto)(register_dto_1.RegisterDto), auth_controller_1.AuthController.register);
-router.post('/login', (0, validation_middleware_1.validateDto)(login_dto_1.LoginDto), auth_controller_1.AuthController.login);
+router.post(urls_1.AUTH_URL.REGISTER, (0, validation_middleware_1.validateDto)(register_dto_1.RegisterDto), auth_controller_1.AuthController.register);
+router.post(urls_1.AUTH_URL.LOGIN, (0, validation_middleware_1.validateDto)(login_dto_1.LoginDto), auth_controller_1.AuthController.login);
 exports.default = router;
 //# sourceMappingURL=authRoutes.js.map

@@ -55,5 +55,5 @@ export const handleUploadError = (error: any, req: Request, res: Response, next:
     });
   }
   
-  next(error);
+  return next(error);
 };

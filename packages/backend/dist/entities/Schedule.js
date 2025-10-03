@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Schedule = void 0;
 const typeorm_1 = require("typeorm");
-const ERecurrencePattern_enum_1 = require("@/shared/enum/ERecurrencePattern.enum");
-const EEventType_enum_1 = require("@/shared/enum/EEventType.enum");
-const EScheduleStatus_enum_1 = require("@/shared/enum/EScheduleStatus.enum");
+const ERecurrencePattern_enum_1 = require("../shared/enum/ERecurrencePattern.enum");
+const EEventType_enum_1 = require("../shared/enum/EEventType.enum");
+const EScheduleStatus_enum_1 = require("../shared/enum/EScheduleStatus.enum");
 let Schedule = class Schedule {
 };
 exports.Schedule = Schedule;

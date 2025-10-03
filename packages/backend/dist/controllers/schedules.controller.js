@@ -7,7 +7,7 @@ exports.SchedulesController = void 0;
 const database_1 = require("../config/database");
 const Schedule_1 = require("../entities/Schedule");
 const dayjs_1 = __importDefault(require("dayjs"));
-const EScheduleStatus_enum_1 = require("@/shared/enum/EScheduleStatus.enum");
+const EScheduleStatus_enum_1 = require("../shared/enum/EScheduleStatus.enum");
 class SchedulesController {
     static async getAllSchedules(req, res) {
         try {

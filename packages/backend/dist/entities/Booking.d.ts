@@ -1,5 +1,5 @@
 import { Commission } from './Commission';
-import { BookingStatus, Duration } from '@/shared/enum/EBooking.enum';
+import { BookingStatus, Duration } from '../shared/enum/EBooking.enum';
 export declare class Booking {
     id: number;
     fullName: string;

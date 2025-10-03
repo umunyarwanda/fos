@@ -18,7 +18,11 @@ const specialProgramRoutes_1 = __importDefault(require("./routes/specialProgramR
 const scheduleRoutes_1 = __importDefault(require("./routes/scheduleRoutes"));
 const commissionRoutes_1 = __importDefault(require("./routes/commissionRoutes"));
 const bookingRoutes_1 = __importDefault(require("./routes/bookingRoutes"));
+const contactRoutes_1 = __importDefault(require("./routes/contactRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const upload_routes_1 = __importDefault(require("./routes/upload.routes"));
+const videoRoutes_1 = __importDefault(require("./routes/videoRoutes"));
+const urls_1 = require("./shared/variables/urls");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
@@ -34,13 +38,16 @@ app.get('/', (req, res) => {
         status: 'running'
     });
 });
-app.use('/api/users', userRoutes_1.default);
-app.use('/api/events', eventRoutes_1.default);
-app.use('/api/special-programs', specialProgramRoutes_1.default);
-app.use('/api/schedules', scheduleRoutes_1.default);
-app.use('/api/commissions', commissionRoutes_1.default);
-app.use('/api/bookings', bookingRoutes_1.default);
-app.use('/api/auth', authRoutes_1.default);
+app.use(urls_1.USERS_URL.BASE, userRoutes_1.default);
+app.use(urls_1.EVENTS_URL.BASE, eventRoutes_1.default);
+app.use(urls_1.SPECIAL_PROGRAMS_URL.BASE, specialProgramRoutes_1.default);
+app.use(urls_1.SCHEDULES_URL.BASE, scheduleRoutes_1.default);
+app.use(urls_1.COMMISSIONS_URL.BASE, commissionRoutes_1.default);
+app.use(urls_1.BOOKINGS_URL.BASE, bookingRoutes_1.default);
+app.use(urls_1.CONTACTS_URL.BASE, contactRoutes_1.default);
+app.use(urls_1.AUTH_URL.BASE, authRoutes_1.default);
+app.use(urls_1.UPLOAD_URL.BASE, upload_routes_1.default);
+app.use(urls_1.VIDEOS_URL.BASE, videoRoutes_1.default);
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.swaggerSpec, {
     explorer: true,
     customCss: '.swagger-ui .topbar { display: none }',

@@ -2,57 +2,57 @@ import { Expose, Type } from 'class-transformer';
 
 export class SpecialProgramResponseDto {
   @Expose()
-  id: number;
+  id!: number;
 
   @Expose()
-  title: string;
+  title!: string;
 
   @Expose()
   subtitle?: string;
 
   @Expose()
-  description: string;
+  description!: string;
 
   @Expose()
   @Type(() => Date)
-  startDate: Date;
+  startDate!: Date;
 
   @Expose()
   @Type(() => Date)
-  endDate: Date;
+  endDate!: Date;
 
   @Expose()
-  startTime: string;
+  startTime!: string;
 
   @Expose()
-  endTime: string;
+  endTime!: string;
 
   @Expose()
-  location: string;
+  location!: string;
 
   @Expose()
   address?: string;
 
   @Expose()
-  capacity: number;
+  capacity!: number;
 
   @Expose()
-  monthlyTuition: number;
+  monthlyTuition!: number;
 
   @Expose()
-  currency: string;
+  currency!: string;
 
   @Expose()
-  minAge: number;
+  minAge!: number;
 
   @Expose()
-  maxAge: number;
+    maxAge!: number;
 
   @Expose()
-  isActive: boolean;
+  isActive!: boolean;
 
   @Expose()
-  isFeatured: boolean;
+  isFeatured!: boolean;
 
   @Expose()
   tags?: string[];
@@ -95,9 +95,9 @@ export class SpecialProgramResponseDto {
 
   @Expose()
   @Type(() => Date)
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => Date)
-  updatedAt: Date;
+  updatedAt!: Date;
 }

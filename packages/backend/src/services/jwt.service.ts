@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../entities/User';
 
 export class JwtService {
-  private static readonly JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+  private static readonly JWT_SECRET: string = process.env.JWT_SECRET || 'your-secret-key';
   private static readonly JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
 
   /**
@@ -17,7 +17,7 @@ export class JwtService {
 
     return jwt.sign(payload, this.JWT_SECRET, {
       expiresIn: this.JWT_EXPIRES_IN,
-    });
+    } as jwt.SignOptions);
   }
 
   /**

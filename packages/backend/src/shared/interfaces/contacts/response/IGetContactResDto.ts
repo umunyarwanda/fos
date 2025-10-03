@@ -1,13 +1,13 @@
-import { ContactSubject, ContactStatus } from '../../../entities/Contact';
+// import { ContactSubject, ContactStatus } from '../../../entities/Contact';
 
 export interface IGetContactResDto {
   id: number;
   fullName: string;
   email: string;
   phoneNumber?: string | null;
-  subject: ContactSubject;
+  subject: string;
   message: string;
-  status: ContactStatus;
+  status: string;
   adminNotes?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;

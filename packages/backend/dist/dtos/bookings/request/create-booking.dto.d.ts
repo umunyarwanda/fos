@@ -1,4 +1,4 @@
-import { Duration } from '@/shared/enum/EBooking.enum';
+import { Duration } from '../../../shared/enum/EBooking.enum';
 import { ICreateBookingReqDto } from '@/shared/interfaces/bookings/request/ICreateBookingReqDto';
 export declare class CreateBookingDto implements ICreateBookingReqDto {
     fullName: string;

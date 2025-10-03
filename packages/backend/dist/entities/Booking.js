@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Booking = void 0;
 const typeorm_1 = require("typeorm");
 const Commission_1 = require("./Commission");
-const EBooking_enum_1 = require("@/shared/enum/EBooking.enum");
+const EBooking_enum_1 = require("../shared/enum/EBooking.enum");
 let Booking = class Booking {
 };
 exports.Booking = Booking;

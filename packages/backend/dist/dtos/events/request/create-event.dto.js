@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateEventDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const EVenueType_enum_1 = require("@/shared/enum/EVenueType.enum");
+const EVenueType_enum_1 = require("../../../shared/enum/EVenueType.enum");
 class FeaturedPerformerDto {
 }
 __decorate([

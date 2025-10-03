@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Event = void 0;
 const typeorm_1 = require("typeorm");
 const User_1 = require("./User");
-const EVenueType_enum_1 = require("@/shared/enum/EVenueType.enum");
+const EVenueType_enum_1 = require("../shared/enum/EVenueType.enum");
 let Event = class Event {
 };
 exports.Event = Event;

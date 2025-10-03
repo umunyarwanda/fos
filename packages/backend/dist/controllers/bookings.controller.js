@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingsController = void 0;
 const database_1 = require("../config/database");
-const Booking_1 = require("../entities/Booking");
 const dayjs_1 = __importDefault(require("dayjs"));
+const Booking_1 = require("../entities/Booking");
+const EBooking_enum_1 = require("../shared/enum/EBooking.enum");
+const Commission_1 = require("../entities/Commission");
 class BookingsController {
     static async getAllBookings(req, res) {
         try {
@@ -101,6 +103,19 @@ class BookingsController {
         try {
             const bookingData = req.body;
             const bookingRepository = database_1.AppDataSource.getRepository(Booking_1.Booking);
+            if (bookingData.commissionId) {
+                const commissionRepository = database_1.AppDataSource.getRepository(Commission_1.Commission);
+                const commission = await commissionRepository.findOne({
+                    where: { id: bookingData.commissionId }
+                });
+                if (!commission) {
+                    res.status(400).json({
+                        message: 'Commission not found',
+                        success: false
+                    });
+                    return;
+                }
+            }
             const booking = bookingRepository.create({
                 ...bookingData,
                 eventDate: new Date(bookingData.eventDate)
@@ -146,16 +161,26 @@ class BookingsController {
                 res.status(404).json({ message: 'Booking not found' });
                 return;
             }
-            if (updateData.status && updateData.status !== booking.status) {
-                if (updateData.status === Booking_1.BookingStatus.CONFIRMED && !booking.confirmedAt) {
-                    updateData.confirmedAt = new Date();
-                }
-                if (updateData.status === Booking_1.BookingStatus.COMPLETED && !booking.completedAt) {
-                    updateData.completedAt = new Date();
+            if (updateData.commissionId) {
+                const commissionRepository = database_1.AppDataSource.getRepository(Commission_1.Commission);
+                const commission = await commissionRepository.findOne({
+                    where: { id: updateData.commissionId }
+                });
+                if (!commission) {
+                    res.status(400).json({
+                        message: 'Commission not found',
+                        success: false
+                    });
+                    return;
                 }
             }
-            if (updateData.eventDate) {
-                updateData.eventDate = new Date(updateData.eventDate);
+            if (updateData.status && updateData.status !== booking.status) {
+                if (updateData.status === EBooking_enum_1.BookingStatus.CONFIRMED && !booking.confirmedAt) {
+                    updateData.confirmedAt = new Date();
+                }
+                if (updateData.status === EBooking_enum_1.BookingStatus.COMPLETED && !booking.completedAt) {
+                    updateData.completedAt = new Date();
+                }
             }
             Object.assign(booking, updateData);
             const updatedBooking = await bookingRepository.save(booking);
@@ -213,7 +238,7 @@ class BookingsController {
         try {
             const bookingRepository = database_1.AppDataSource.getRepository(Booking_1.Booking);
             const bookings = await bookingRepository.find({
-                where: { status: Booking_1.BookingStatus.PENDING },
+                where: { status: EBooking_enum_1.BookingStatus.PENDING },
                 relations: ['commission'],
                 order: { createdAt: 'DESC' }
             });

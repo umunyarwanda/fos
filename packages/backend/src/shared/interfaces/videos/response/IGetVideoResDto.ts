@@ -1,11 +1,11 @@
-import { VideoType } from '../../../entities/Video';
+import { EVideoType } from "../../../enum/EVideoType.enum";
 
 export interface IGetVideoResDto {
   id: number;
   url: string;
   title: string;
   description?: string | null;
-  type: VideoType;
+  type: EVideoType;
   isActive: boolean;
   isFeatured: boolean;
   createdAt?: string | null;

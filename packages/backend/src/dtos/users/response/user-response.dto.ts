@@ -2,36 +2,36 @@ import { Exclude, Expose, Type } from 'class-transformer';
 
 export class UserResponseDto {
   @Expose()
-  id: number;
+  id!: number;
 
   @Expose()
-  email: string;
+  email!: string;
 
   @Expose()
-  username: string;
+  username!: string;
 
   @Exclude()
-  password: string;
+  password!: string;
 
   @Expose()
-  firstName: string;
+  firstName!: string;
 
   @Expose()
-  lastName: string;
+  lastName!: string;
 
   @Expose()
   phone?: string;
 
   @Expose()
-  isActive: boolean;
+  isActive!: boolean;
 
   @Expose()
   @Type(() => Date)
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => Date)
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @Expose()
   @Type(() => Date)

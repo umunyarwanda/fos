@@ -52,6 +52,10 @@ __decorate([
     __metadata("design:type", String)
 ], Commission.prototype, "duration", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 255, nullable: true }),
+    __metadata("design:type", String)
+], Commission.prototype, "coverImage", void 0);
+__decorate([
     (0, typeorm_1.Column)({ type: 'json', nullable: true }),
     __metadata("design:type", Array)
 ], Commission.prototype, "inclusions", void 0);

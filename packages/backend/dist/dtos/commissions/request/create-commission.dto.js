@@ -40,4 +40,9 @@ __decorate([
     (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], CreateCommissionDto.prototype, "inclusions", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateCommissionDto.prototype, "coverImage", void 0);
 //# sourceMappingURL=create-commission.dto.js.map

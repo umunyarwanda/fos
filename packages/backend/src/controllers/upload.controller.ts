@@ -36,7 +36,7 @@ export const uploadSingleImage = async (req: Request, res: Response) => {
       format: (result as any).format,
       bytes: (result as any).bytes
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Image uploaded successfully',
       data: uploadResDto
@@ -44,7 +44,7 @@ export const uploadSingleImage = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Upload single image error:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Internal server error during image upload',
       data: null
@@ -87,7 +87,7 @@ export const uploadSingleImageBinary = async (req: Request, res: Response) => {
       bytes: (result as any).bytes
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Image uploaded successfully',
       data: uploadResDto
@@ -95,7 +95,7 @@ export const uploadSingleImageBinary = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Upload single image binary error:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Internal server error during image upload',
       data: null
@@ -147,7 +147,7 @@ export const uploadMultipleImages = async (req: Request, res: Response) => {
       count: uploadedImages.length
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Images uploaded successfully',
       data: {
@@ -158,7 +158,7 @@ export const uploadMultipleImages = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Upload multiple images error:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Internal server error during image upload',
       data: null
@@ -182,13 +182,13 @@ export const deleteImage = async (req: Request, res: Response) => {
     const result = await cloudinary.uploader.destroy(public_id);
 
     if (result.result === 'ok') {
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: 'Image deleted successfully',
         data: { public_id, deleted: true }
       } as IResponseDto<any>);
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
         message: 'Image not found or already deleted',
         data: null
@@ -197,7 +197,7 @@ export const deleteImage = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Delete image error:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Internal server error during image deletion',
       data: null

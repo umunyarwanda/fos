@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateScheduleDto = void 0;
 const class_validator_1 = require("class-validator");
-const EEventType_enum_1 = require("@/shared/enum/EEventType.enum");
-const EScheduleStatus_enum_1 = require("@/shared/enum/EScheduleStatus.enum");
-const ERecurrencePattern_enum_1 = require("@/shared/enum/ERecurrencePattern.enum");
+const EEventType_enum_1 = require("../../../shared/enum/EEventType.enum");
+const EScheduleStatus_enum_1 = require("../../../shared/enum/EScheduleStatus.enum");
+const ERecurrencePattern_enum_1 = require("../../../shared/enum/ERecurrencePattern.enum");
 class CreateScheduleDto {
 }
 exports.CreateScheduleDto = CreateScheduleDto;

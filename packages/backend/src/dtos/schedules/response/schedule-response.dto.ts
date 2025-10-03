@@ -2,23 +2,23 @@ import { Expose, Type } from 'class-transformer';
 
 export class ScheduleResponseDto {
   @Expose()
-  id: number;
+  id!: number;
 
   @Expose()
-  title: string;
+  title!: string;
 
   @Expose()
   description?: string;
 
   @Expose()
   @Type(() => Date)
-  scheduleDate: Date;
+  scheduleDate!: Date;
 
   @Expose()
-  startTime: string;
+  startTime!: string;
 
   @Expose()
-  endTime: string;
+  endTime!: string;
 
   @Expose()
   location?: string;
@@ -27,28 +27,28 @@ export class ScheduleResponseDto {
   address?: string;
 
   @Expose()
-  eventType: 'rehearsal' | 'performance' | 'outreach' | 'recording' | 'meeting' | 'other';
+  eventType!: 'rehearsal' | 'performance' | 'outreach' | 'recording' | 'meeting' | 'other';
 
   @Expose()
-  status: 'confirmed' | 'tentative' | 'cancelled' | 'completed';
+  status!: 'confirmed' | 'tentative' | 'cancelled' | 'completed';
 
   @Expose()
-  isRecurring: boolean;
+  isRecurring!: boolean;
 
   @Expose()
-  recurrencePattern?: 'weekly' | 'monthly' | 'yearly' | 'none';
+  recurrencePattern?: 'weekly' | 'monthly' | 'yearly' | 'none' = 'none';
 
   @Expose()
-  recurrenceInterval?: number;
+  recurrenceInterval?: number = 0;
 
   @Expose()
-  isActive: boolean;
-
-  @Expose()
-  @Type(() => Date)
-  createdAt: Date;
+  isActive!: boolean;
 
   @Expose()
   @Type(() => Date)
-  updatedAt: Date;
+  createdAt!: Date;
+
+  @Expose()
+  @Type(() => Date)
+  updatedAt!: Date;
 }

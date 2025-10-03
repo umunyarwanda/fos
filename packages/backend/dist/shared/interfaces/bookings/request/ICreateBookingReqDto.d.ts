@@ -1,4 +1,4 @@
-import { Duration } from "@/shared/enum/EBooking.enum";
+import { Duration } from "../../../../shared/enum/EBooking.enum";
 export interface ICreateBookingReqDto {
     fullName: string;
     email: string;

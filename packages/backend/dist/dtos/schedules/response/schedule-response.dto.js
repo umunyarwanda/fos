@@ -12,6 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScheduleResponseDto = void 0;
 const class_transformer_1 = require("class-transformer");
 class ScheduleResponseDto {
+    constructor() {
+        this.recurrencePattern = 'none';
+        this.recurrenceInterval = 0;
+    }
 }
 exports.ScheduleResponseDto = ScheduleResponseDto;
 __decorate([

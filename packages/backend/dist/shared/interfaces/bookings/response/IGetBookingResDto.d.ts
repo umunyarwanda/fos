@@ -1,4 +1,4 @@
-import { Duration, BookingStatus } from '../../../entities/Booking';
+import { BookingStatus, Duration } from "../../../enum/EBooking.enum";
 export interface IGetBookingResDto {
     id: number;
     fullName: string;

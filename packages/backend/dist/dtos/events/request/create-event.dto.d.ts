@@ -1,5 +1,5 @@
 import { ICreateEventReqDto } from '@/shared/interfaces/events/request/ICreateEventReqDto';
-import { EVenueType } from '@/shared/enum/EVenueType.enum';
+import { EVenueType } from '../../../shared/enum/EVenueType.enum';
 declare class FeaturedPerformerDto {
     name: string;
     title: string;

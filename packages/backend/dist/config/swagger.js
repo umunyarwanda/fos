@@ -20,6 +20,14 @@ const options = {
             },
         ],
         components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                    description: 'Enter JWT token'
+                }
+            },
             schemas: {
                 Event: {
                     type: 'object',
@@ -1399,6 +1407,376 @@ const options = {
                             type: 'string',
                             enum: ['pending', 'confirmed', 'in_progress', 'completed', 'cancelled'],
                             example: 'confirmed'
+                        }
+                    }
+                },
+                Contact: {
+                    type: 'object',
+                    properties: {
+                        id: {
+                            type: 'integer',
+                            example: 1
+                        },
+                        fullName: {
+                            type: 'string',
+                            example: 'John Doe'
+                        },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            example: 'john.doe@example.com'
+                        },
+                        phoneNumber: {
+                            type: 'string',
+                            example: '+250 788 123 456'
+                        },
+                        subject: {
+                            type: 'string',
+                            enum: ['general_inquiry', 'event_booking', 'commission_request', 'support', 'feedback', 'other'],
+                            example: 'event_booking'
+                        },
+                        message: {
+                            type: 'string',
+                            example: 'I would like to book your band for our wedding ceremony...'
+                        },
+                        status: {
+                            type: 'string',
+                            enum: ['new', 'in_progress', 'responded', 'closed'],
+                            example: 'new'
+                        },
+                        adminNotes: {
+                            type: 'string',
+                            example: 'Called client, discussed pricing, sent proposal'
+                        },
+                        createdAt: {
+                            type: 'string',
+                            format: 'date-time',
+                            example: '2024-01-01T00:00:00.000Z'
+                        },
+                        updatedAt: {
+                            type: 'string',
+                            format: 'date-time',
+                            example: '2024-01-01T00:00:00.000Z'
+                        }
+                    }
+                },
+                CreateContactRequest: {
+                    type: 'object',
+                    required: ['fullName', 'email', 'subject', 'message'],
+                    properties: {
+                        fullName: {
+                            type: 'string',
+                            minLength: 2,
+                            maxLength: 255,
+                            example: 'John Doe'
+                        },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            maxLength: 255,
+                            example: 'john.doe@example.com'
+                        },
+                        phoneNumber: {
+                            type: 'string',
+                            maxLength: 20,
+                            example: '+250 788 123 456'
+                        },
+                        subject: {
+                            type: 'string',
+                            enum: ['general_inquiry', 'event_booking', 'commission_request', 'support', 'feedback', 'other'],
+                            example: 'event_booking'
+                        },
+                        message: {
+                            type: 'string',
+                            minLength: 10,
+                            maxLength: 2000,
+                            example: 'I would like to book your band for our wedding ceremony...'
+                        }
+                    }
+                },
+                UpdateContactRequest: {
+                    type: 'object',
+                    properties: {
+                        fullName: {
+                            type: 'string',
+                            minLength: 2,
+                            maxLength: 255,
+                            example: 'John Doe'
+                        },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            maxLength: 255,
+                            example: 'john.doe@example.com'
+                        },
+                        phoneNumber: {
+                            type: 'string',
+                            maxLength: 20,
+                            example: '+250 788 123 456'
+                        },
+                        subject: {
+                            type: 'string',
+                            enum: ['general_inquiry', 'event_booking', 'commission_request', 'support', 'feedback', 'other'],
+                            example: 'event_booking'
+                        },
+                        message: {
+                            type: 'string',
+                            minLength: 10,
+                            maxLength: 2000,
+                            example: 'I would like to book your band for our wedding ceremony...'
+                        },
+                        status: {
+                            type: 'string',
+                            enum: ['new', 'in_progress', 'responded', 'closed'],
+                            example: 'responded'
+                        },
+                        adminNotes: {
+                            type: 'string',
+                            maxLength: 1000,
+                            example: 'Called client, discussed pricing, sent proposal'
+                        }
+                    }
+                },
+                LoginRequest: {
+                    type: 'object',
+                    required: ['email', 'password'],
+                    properties: {
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            example: 'user@example.com'
+                        },
+                        password: {
+                            type: 'string',
+                            minLength: 6,
+                            example: 'password123'
+                        }
+                    }
+                },
+                RegisterRequest: {
+                    type: 'object',
+                    required: ['email', 'username', 'password', 'confirmPassword', 'firstName', 'lastName'],
+                    properties: {
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            example: 'user@example.com'
+                        },
+                        username: {
+                            type: 'string',
+                            minLength: 3,
+                            maxLength: 50,
+                            example: 'johndoe'
+                        },
+                        password: {
+                            type: 'string',
+                            minLength: 6,
+                            example: 'password123'
+                        },
+                        confirmPassword: {
+                            type: 'string',
+                            minLength: 6,
+                            example: 'password123'
+                        },
+                        firstName: {
+                            type: 'string',
+                            minLength: 2,
+                            maxLength: 50,
+                            example: 'John'
+                        },
+                        lastName: {
+                            type: 'string',
+                            minLength: 2,
+                            maxLength: 50,
+                            example: 'Doe'
+                        },
+                        phone: {
+                            type: 'string',
+                            example: '+250788123456'
+                        }
+                    }
+                },
+                AuthResponse: {
+                    type: 'object',
+                    properties: {
+                        success: {
+                            type: 'boolean',
+                            example: true
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                user: {
+                                    type: 'object',
+                                    properties: {
+                                        id: {
+                                            type: 'integer',
+                                            example: 1
+                                        },
+                                        email: {
+                                            type: 'string',
+                                            format: 'email',
+                                            example: 'user@example.com'
+                                        },
+                                        username: {
+                                            type: 'string',
+                                            example: 'johndoe'
+                                        },
+                                        firstName: {
+                                            type: 'string',
+                                            example: 'John'
+                                        },
+                                        lastName: {
+                                            type: 'string',
+                                            example: 'Doe'
+                                        },
+                                        phone: {
+                                            type: 'string',
+                                            example: '+250788123456'
+                                        }
+                                    }
+                                },
+                                token: {
+                                    type: 'string',
+                                    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+                                },
+                                expiresIn: {
+                                    type: 'integer',
+                                    example: 86400
+                                }
+                            }
+                        }
+                    }
+                },
+                ApiResponse: {
+                    type: 'object',
+                    properties: {
+                        success: {
+                            type: 'boolean',
+                            example: true
+                        },
+                        message: {
+                            type: 'string',
+                            example: 'Operation completed successfully'
+                        },
+                        data: {
+                            type: 'object',
+                            description: 'Response data (varies by endpoint)'
+                        }
+                    }
+                },
+                Video: {
+                    type: 'object',
+                    properties: {
+                        id: {
+                            type: 'integer',
+                            example: 1
+                        },
+                        url: {
+                            type: 'string',
+                            example: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                        },
+                        title: {
+                            type: 'string',
+                            example: 'Amazing Performance Video'
+                        },
+                        description: {
+                            type: 'string',
+                            example: 'A beautiful performance from our latest concert'
+                        },
+                        type: {
+                            type: 'string',
+                            enum: ['performance', 'worship', 'concert'],
+                            example: 'performance'
+                        },
+                        isActive: {
+                            type: 'boolean',
+                            example: true
+                        },
+                        isFeatured: {
+                            type: 'boolean',
+                            example: false
+                        },
+                        createdAt: {
+                            type: 'string',
+                            format: 'date-time',
+                            example: '2024-01-01T00:00:00.000Z'
+                        },
+                        updatedAt: {
+                            type: 'string',
+                            format: 'date-time',
+                            example: '2024-01-01T00:00:00.000Z'
+                        }
+                    }
+                },
+                CreateVideoRequest: {
+                    type: 'object',
+                    required: ['url', 'title', 'type'],
+                    properties: {
+                        url: {
+                            type: 'string',
+                            format: 'uri',
+                            maxLength: 500,
+                            example: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                        },
+                        title: {
+                            type: 'string',
+                            minLength: 2,
+                            maxLength: 255,
+                            example: 'Amazing Performance Video'
+                        },
+                        description: {
+                            type: 'string',
+                            maxLength: 1000,
+                            example: 'A beautiful performance from our latest concert'
+                        },
+                        type: {
+                            type: 'string',
+                            enum: ['performance', 'worship', 'concert'],
+                            example: 'performance'
+                        },
+                        isActive: {
+                            type: 'boolean',
+                            example: true
+                        },
+                        isFeatured: {
+                            type: 'boolean',
+                            example: false
+                        }
+                    }
+                },
+                UpdateVideoRequest: {
+                    type: 'object',
+                    properties: {
+                        url: {
+                            type: 'string',
+                            format: 'uri',
+                            maxLength: 500,
+                            example: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                        },
+                        title: {
+                            type: 'string',
+                            minLength: 2,
+                            maxLength: 255,
+                            example: 'Amazing Performance Video'
+                        },
+                        description: {
+                            type: 'string',
+                            maxLength: 1000,
+                            example: 'A beautiful performance from our latest concert'
+                        },
+                        type: {
+                            type: 'string',
+                            enum: ['performance', 'worship', 'concert'],
+                            example: 'performance'
+                        },
+                        isActive: {
+                            type: 'boolean',
+                            example: true
+                        },
+                        isFeatured: {
+                            type: 'boolean',
+                            example: false
                         }
                     }
                 }

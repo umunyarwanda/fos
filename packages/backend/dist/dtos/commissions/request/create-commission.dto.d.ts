@@ -4,5 +4,6 @@ export declare class CreateCommissionDto {
     amount: number;
     duration?: string;
     inclusions?: string[];
+    coverImage?: string;
 }
 //# sourceMappingURL=create-commission.dto.d.ts.map

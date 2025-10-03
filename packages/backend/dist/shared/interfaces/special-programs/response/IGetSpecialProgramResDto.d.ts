@@ -3,8 +3,8 @@ export interface IGetSpecialProgramResDto {
     title: string;
     subtitle?: string;
     description: string;
-    startDate: string;
-    endDate: string;
+    startDate: string | null;
+    endDate: string | null;
     startTime: string;
     endTime: string;
     location: string;

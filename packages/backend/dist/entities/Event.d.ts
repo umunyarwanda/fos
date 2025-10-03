@@ -1,5 +1,5 @@
 import { User } from './User';
-import { EVenueType } from '@/shared/enum/EVenueType.enum';
+import { EVenueType } from '../shared/enum/EVenueType.enum';
 export declare class Event {
     id: number;
     title: string;

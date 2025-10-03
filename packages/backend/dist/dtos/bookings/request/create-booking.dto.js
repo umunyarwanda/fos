@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateBookingDto = void 0;
-const EBooking_enum_1 = require("@/shared/enum/EBooking.enum");
+const EBooking_enum_1 = require("../../../shared/enum/EBooking.enum");
 const class_validator_1 = require("class-validator");
 class CreateBookingDto {
 }

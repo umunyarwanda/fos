@@ -4,5 +4,6 @@ export interface ICreateCommissionReqDto {
     amount: number;
     duration?: string;
     inclusions?: string[];
+    coverImage?: string;
 }
 //# sourceMappingURL=ICreateCommissionReqDto.d.ts.map

@@ -1,11 +1,11 @@
-import { ContactSubject, ContactStatus } from '../../../entities/Contact';
+// import { ContactSubject, ContactStatus } from '../../../entities/Contact';
 
 export interface IUpdateContactReqDto {
   fullName?: string;
   email?: string;
   phoneNumber?: string;
-  subject?: ContactSubject;
+  subject?: string;
   message?: string;
-  status?: ContactStatus;
+  status?: string;
   adminNotes?: string;
 }
