@@ -288,7 +288,7 @@ export default function SpecialPrograms() {
       render: (record: IGetSpecialProgramResDto) => (
         <div>
           <div className="font-medium text-gray-900">
-            {new Date(record.startDate).toLocaleDateString()} - {new Date(record.endDate).toLocaleDateString()}
+            {record.startDate && new Date(record.startDate).toLocaleDateString()} - {record.endDate && new Date(record.endDate).toLocaleDateString()}
           </div>
           <div className="text-sm text-gray-500">{record.startTime} - {record.endTime}</div>
         </div>
@@ -354,8 +354,8 @@ export default function SpecialPrograms() {
             Edit
           </Button>
           <Popconfirm
-            title="Remove this event"
-            description="Are you sure to remove this event?"
+            title="Remove this program"
+            description="Are you sure to remove this program?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => {
@@ -388,7 +388,7 @@ export default function SpecialPrograms() {
             className="bg-theme-clr hover:bg-yellow-600 text-black font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
-            Create Event
+            Create Program
           </motion.button>
         </div>
       </div>
@@ -402,7 +402,7 @@ export default function SpecialPrograms() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search events..."
+                placeholder="Search programs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-clr focus:border-transparent"
@@ -479,7 +479,7 @@ export default function SpecialPrograms() {
             className="bg-theme-clr hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center gap-2 mx-auto"
           >
             <Plus className="w-5 h-5" />
-            Create Event
+            Create Program
           </motion.button>
         </motion.div>
       )}
@@ -677,16 +677,16 @@ export default function SpecialPrograms() {
                 Cancel
               </Button>
               <Button type="primary" htmlType="submit" loading={uploadingImages}>
-                Create Event
+                Create Program
               </Button>
             </div>
           </Form.Item>
         </Form>
       </Modal>
 
-      {/* Edit Event Modal */}
+      {/* Edit Program Modal */}
       <Modal
-        title="Edit Event"
+        title="Edit Program"
         open={isEditModalVisible}
         onCancel={() => {
           setIsEditModalVisible(false)
@@ -703,33 +703,33 @@ export default function SpecialPrograms() {
         >
           <Form.Item
             name="title"
-            label="Event Title"
-            rules={[{ required: true, message: 'Please enter event title' }]}
+            label="Program Title"
+            rules={[{ required: true, message: 'Please enter program title' }]}
           >
-            <Input placeholder="Enter event title" />
+            <Input placeholder="Enter program title" />
           </Form.Item>
 
           <Form.Item
             name="subtitle"
             label="Subtitle"
           >
-            <Input placeholder="Enter event subtitle (optional)" />
+            <Input placeholder="Enter program subtitle (optional)" />
           </Form.Item>
 
           <Form.Item
             name="description"
             label="Description"
-            rules={[{ required: true, message: 'Please enter event description' }]}
+            rules={[{ required: true, message: 'Please enter program description' }]}
           >
-            <Input.TextArea rows={3} placeholder="Enter event description" />
+            <Input.TextArea rows={3} placeholder="Enter program description" />
           </Form.Item>
 
           <Form.Item
             name="location"
             label="Location"
-            rules={[{ required: true, message: 'Please enter event location' }]}
+            rules={[{ required: true, message: 'Please enter program location' }]}
           >
-            <Input placeholder="Enter event location" />
+            <Input placeholder="Enter program location" />
           </Form.Item>
 
           <Form.Item
@@ -854,11 +854,11 @@ export default function SpecialPrograms() {
 
           <Form.Item
             name="isFeatured"
-            label="Featured Event"
+            label="Featured Program"
             valuePropName="checked"
           >
             <input type="checkbox" className="mr-2" />
-            Mark as featured event
+            Mark as featured program
           </Form.Item>
 
           <Form.Item className="mb-0">
@@ -871,16 +871,16 @@ export default function SpecialPrograms() {
                 Cancel
               </Button>
               <Button type="primary" htmlType="submit" loading={uploadingImages}>
-                Update Event
+                Update Program
               </Button>
             </div>
           </Form.Item>
         </Form>
       </Modal>
 
-      {/* View Event Modal */}
+      {/* View Program Modal */}
       <Modal
-        title="Event Details"
+        title="Program Details"
         open={isViewModalVisible}
         onCancel={() => {
           setIsViewModalVisible(false)
@@ -891,7 +891,7 @@ export default function SpecialPrograms() {
       >
         {viewingProgram && (
           <div className="space-y-6">
-            {/* Event Header */}
+            {/* Program Header */}
             <div className="flex items-start gap-4">
               {viewingProgram.galleryImages && viewingProgram.galleryImages.length > 0 ? (
                 // <img 
@@ -929,7 +929,7 @@ export default function SpecialPrograms() {
               </div>
             </div>
 
-            {/* Event Details Grid */}
+            {/* Program Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Date & Time */}
               <div className="bg-gray-50 rounded-lg p-4">
@@ -941,12 +941,12 @@ export default function SpecialPrograms() {
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-gray-500" />
                     <span className="text-sm text-gray-600">
-                      {new Date(viewingProgram.startDate).toLocaleDateString('en-US', {
+                      {viewingProgram.startDate && new Date(viewingProgram.startDate).toLocaleDateString('en-US', {
                         weekday: 'long',
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
-                      })} - {new Date(viewingProgram.endDate).toLocaleDateString('en-US', {
+                      })} - {viewingProgram.endDate && new Date(viewingProgram.endDate).toLocaleDateString('en-US', {
                         weekday: 'long',
                         year: 'numeric',
                         month: 'long',
@@ -1011,18 +1011,18 @@ export default function SpecialPrograms() {
             {/* Gallery Images */}
             {viewingProgram.galleryImages && viewingProgram.galleryImages.length > 0 && (
               <div>
-                <h3 className="font-semibold text-gray-900 mb-3">Event Images</h3>
+                <h3 className="font-semibold text-gray-900 mb-3">Program Images</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {viewingProgram.galleryImages.map((image, index) => (
                     // <img
                     //   key={index}
                     //   src={image}
-                    //   alt={`Event image ${index + 1}`}
+                    //   alt={`Program image ${index + 1}`}
                     //   className="w-full h-32 object-cover rounded-lg"
                     // />
                     <Image 
                       src={image}
-                      alt={`Event image ${index + 1}`}
+                      alt={`Program image ${index + 1}`}
                       className="w-full h-32 object-cover rounded-lg"
                       style={{
                         width: '100%',

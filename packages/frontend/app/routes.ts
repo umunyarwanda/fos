@@ -27,6 +27,7 @@ export default [
     route("/dashboard/videos", "pages/dashboard/videos.tsx"),
     route("/dashboard/analytics", "pages/dashboard/analytics.tsx"),
     route("/dashboard/settings", "pages/dashboard/settings.tsx"),
-    route("/dashboard/special-programs", "pages/dashboard/special-programs.tsx")
+    route("/dashboard/special-programs", "pages/dashboard/special-programs.tsx"),
+    route("/dashboard/commissions", "pages/dashboard/commissions.tsx")
   ])
 ] satisfies RouteConfig;

@@ -67,3 +67,11 @@ export const UPLOAD_URL = {
   BASE: `/api/upload`,
   UPLOAD_IMAGE: `/upload`,
 }
+
+export const VIDEOS_URL = {
+  BASE: `/api/videos`,
+  GET_VIDEO_BY_ID: `/videos/:id`,
+  CREATE_VIDEO: `/videos`,
+  UPDATE_VIDEO: `/videos/:id`,
+  DELETE_VIDEO: `/videos/:id`,
+}

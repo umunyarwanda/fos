@@ -5,6 +5,7 @@ export interface IGetCommissionResDto {
   amount: number;
   duration?: string | null;
   inclusions?: string[] | null;
+  coverImage?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 }

@@ -16,7 +16,8 @@ import bookingRoutes from './routes/bookingRoutes';
 import contactRoutes from './routes/contactRoutes';
 import authRoutes from './routes/authRoutes';
 import uploadRoutes from './routes/upload.routes';
-import { SCHEDULES_URL, EVENTS_URL, USERS_URL, SPECIAL_PROGRAMS_URL, COMMISSIONS_URL, BOOKINGS_URL, CONTACTS_URL, AUTH_URL, UPLOAD_URL } from './shared/variables/urls';
+import videoRoutes from './routes/videoRoutes';
+import { SCHEDULES_URL, EVENTS_URL, USERS_URL, SPECIAL_PROGRAMS_URL, COMMISSIONS_URL, BOOKINGS_URL, CONTACTS_URL, AUTH_URL, UPLOAD_URL, VIDEOS_URL } from './shared/variables/urls';
 
 // Load environment variables
 dotenv.config();
@@ -49,6 +50,7 @@ app.use(BOOKINGS_URL.BASE, bookingRoutes);
 app.use(CONTACTS_URL.BASE, contactRoutes);
 app.use(AUTH_URL.BASE, authRoutes);
 app.use(UPLOAD_URL.BASE, uploadRoutes);
+app.use(VIDEOS_URL.BASE, videoRoutes);
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {

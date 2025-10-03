@@ -45,6 +45,9 @@ export class Commission {
   @Column({ nullable: true })
   duration?: string;
 
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  coverImage?: string;
+
   @Column({ type: 'json', nullable: true })
   inclusions?: string[];
 

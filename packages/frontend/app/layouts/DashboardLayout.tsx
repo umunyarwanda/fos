@@ -17,7 +17,10 @@ import {
   Plus,
   HelpCircle,
   Crown,
-  Play
+  Play,
+  CalendarDays,
+  CalendarCheck,
+  DollarSign
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from '~/assets/logo-dark.png'
@@ -33,8 +36,10 @@ function DashboardLayout() {
   const navigate = useNavigate()
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
-    { name: 'Events', href: '/dashboard/events', icon: Calendar },
+    { name: 'Events', href: '/dashboard/events', icon: CalendarDays },
+    { name: 'Special Programs', href: '/dashboard/special-programs', icon: CalendarCheck },
     { name: 'Members', href: '/dashboard/members', icon: Users },
+    { name: 'Commissions', href: '/dashboard/commissions', icon: DollarSign },
     { name: 'Videos', href: '/dashboard/videos', icon: Play },
     { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
     { name: 'Settings', href: '/dashboard/settings', icon: Settings },

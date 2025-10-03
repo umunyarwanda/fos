@@ -1659,6 +1659,121 @@ const options = {
               description: 'Response data (varies by endpoint)'
             }
           }
+        },
+        Video: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              example: 1
+            },
+            url: {
+              type: 'string',
+              example: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+            },
+            title: {
+              type: 'string',
+              example: 'Amazing Performance Video'
+            },
+            description: {
+              type: 'string',
+              example: 'A beautiful performance from our latest concert'
+            },
+            type: {
+              type: 'string',
+              enum: ['performance', 'worship', 'concert'],
+              example: 'performance'
+            },
+            isActive: {
+              type: 'boolean',
+              example: true
+            },
+            isFeatured: {
+              type: 'boolean',
+              example: false
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              example: '2024-01-01T00:00:00.000Z'
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              example: '2024-01-01T00:00:00.000Z'
+            }
+          }
+        },
+        CreateVideoRequest: {
+          type: 'object',
+          required: ['url', 'title', 'type'],
+          properties: {
+            url: {
+              type: 'string',
+              format: 'uri',
+              maxLength: 500,
+              example: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+            },
+            title: {
+              type: 'string',
+              minLength: 2,
+              maxLength: 255,
+              example: 'Amazing Performance Video'
+            },
+            description: {
+              type: 'string',
+              maxLength: 1000,
+              example: 'A beautiful performance from our latest concert'
+            },
+            type: {
+              type: 'string',
+              enum: ['performance', 'worship', 'concert'],
+              example: 'performance'
+            },
+            isActive: {
+              type: 'boolean',
+              example: true
+            },
+            isFeatured: {
+              type: 'boolean',
+              example: false
+            }
+          }
+        },
+        UpdateVideoRequest: {
+          type: 'object',
+          properties: {
+            url: {
+              type: 'string',
+              format: 'uri',
+              maxLength: 500,
+              example: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+            },
+            title: {
+              type: 'string',
+              minLength: 2,
+              maxLength: 255,
+              example: 'Amazing Performance Video'
+            },
+            description: {
+              type: 'string',
+              maxLength: 1000,
+              example: 'A beautiful performance from our latest concert'
+            },
+            type: {
+              type: 'string',
+              enum: ['performance', 'worship', 'concert'],
+              example: 'performance'
+            },
+            isActive: {
+              type: 'boolean',
+              example: true
+            },
+            isFeatured: {
+              type: 'boolean',
+              example: false
+            }
+          }
         }
       }
     }

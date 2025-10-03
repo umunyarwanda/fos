@@ -41,7 +41,38 @@ export class CommissionsController {
    *                 data:
    *                   type: array
    *                   items:
-   *                     $ref: '#/components/schemas/Commission'
+   *                     type: object
+   *                     properties:
+   *                       id:
+   *                         type: integer
+   *                         example: 1
+   *                       title:
+   *                         type: string
+   *                         example: "Piano Performance"
+   *                       description:
+   *                         type: string
+   *                         example: "Professional piano performance for events"
+   *                       amount:
+   *                         type: number
+   *                         format: decimal
+   *                         example: 500.00
+   *                       duration:
+   *                         type: string
+   *                         example: "2 hours"
+   *                       coverImage:
+   *                         type: string
+   *                         example: "https://example.com/cover-image.jpg"
+   *                       inclusions:
+   *                         type: array
+   *                         items:
+   *                           type: string
+   *                         example: ["Sound system", "Microphone", "Setup assistance"]
+   *                       createdAt:
+   *                         type: string
+   *                         example: "15 Jan 2024 10:30"
+   *                       updatedAt:
+   *                         type: string
+   *                         example: "15 Jan 2024 10:30"
    *       500:
    *         description: Internal server error
    *         content:
@@ -76,6 +107,7 @@ export class CommissionsController {
         description: commission.description,
         amount: commission.amount,
         duration: commission.duration,
+        coverImage: commission.coverImage,
         inclusions: commission.inclusions,
         createdAt: commission.createdAt ? dayjs(commission.createdAt).format('DD MMM YYYY HH:mm') : null,
         updatedAt: commission.updatedAt ? dayjs(commission.updatedAt).format('DD MMM YYYY HH:mm') : null,
@@ -117,7 +149,38 @@ export class CommissionsController {
    *                   type: boolean
    *                   example: true
    *                 data:
-   *                   $ref: '#/components/schemas/Commission'
+   *                   type: object
+   *                   properties:
+   *                     id:
+   *                       type: integer
+   *                       example: 1
+   *                     title:
+   *                       type: string
+   *                       example: "Piano Performance"
+   *                     description:
+   *                       type: string
+   *                       example: "Professional piano performance for events"
+   *                     amount:
+   *                       type: number
+   *                       format: decimal
+   *                       example: 500.00
+   *                     duration:
+   *                       type: string
+   *                       example: "2 hours"
+   *                     coverImage:
+   *                       type: string
+   *                       example: "https://example.com/cover-image.jpg"
+   *                     inclusions:
+   *                       type: array
+   *                       items:
+   *                         type: string
+   *                       example: ["Sound system", "Microphone", "Setup assistance"]
+   *                     createdAt:
+   *                       type: string
+   *                       example: "15 Jan 2024 10:30"
+   *                     updatedAt:
+   *                       type: string
+   *                       example: "15 Jan 2024 10:30"
    *       404:
    *         description: Commission not found
    *         content:
@@ -152,6 +215,7 @@ export class CommissionsController {
         description: commission.description,
         amount: commission.amount,
         duration: commission.duration,
+        coverImage: commission.coverImage,
         inclusions: commission.inclusions,
         createdAt: commission.createdAt ? dayjs(commission.createdAt).format('DD MMM YYYY HH:mm') : null,
         updatedAt: commission.updatedAt ? dayjs(commission.updatedAt).format('DD MMM YYYY HH:mm') : null,
@@ -192,7 +256,38 @@ export class CommissionsController {
    *                   type: boolean
    *                   example: true
    *                 data:
-   *                   $ref: '#/components/schemas/Commission'
+   *                   type: object
+   *                   properties:
+   *                     id:
+   *                       type: integer
+   *                       example: 1
+   *                     title:
+   *                       type: string
+   *                       example: "Piano Performance"
+   *                     description:
+   *                       type: string
+   *                       example: "Professional piano performance for events"
+   *                     amount:
+   *                       type: number
+   *                       format: decimal
+   *                       example: 500.00
+   *                     duration:
+   *                       type: string
+   *                       example: "2 hours"
+   *                     coverImage:
+   *                       type: string
+   *                       example: "https://example.com/cover-image.jpg"
+   *                     inclusions:
+   *                       type: array
+   *                       items:
+   *                         type: string
+   *                       example: ["Sound system", "Microphone", "Setup assistance"]
+   *                     createdAt:
+   *                       type: string
+   *                       example: "15 Jan 2024 10:30"
+   *                     updatedAt:
+   *                       type: string
+   *                       example: "15 Jan 2024 10:30"
    *       400:
    *         description: Validation error
    *         content:
@@ -221,6 +316,7 @@ export class CommissionsController {
         description: savedCommission.description,
         amount: savedCommission.amount,
         duration: savedCommission.duration,
+        coverImage: savedCommission.coverImage,
         inclusions: savedCommission.inclusions,
         createdAt: savedCommission.createdAt ? dayjs(savedCommission.createdAt).format('DD MMM YYYY HH:mm') : null,
         updatedAt: savedCommission.updatedAt ? dayjs(savedCommission.updatedAt).format('DD MMM YYYY HH:mm') : null,
@@ -268,7 +364,38 @@ export class CommissionsController {
    *                   type: boolean
    *                   example: true
    *                 data:
-   *                   $ref: '#/components/schemas/Commission'
+   *                   type: object
+   *                   properties:
+   *                     id:
+   *                       type: integer
+   *                       example: 1
+   *                     title:
+   *                       type: string
+   *                       example: "Piano Performance"
+   *                     description:
+   *                       type: string
+   *                       example: "Professional piano performance for events"
+   *                     amount:
+   *                       type: number
+   *                       format: decimal
+   *                       example: 500.00
+   *                     duration:
+   *                       type: string
+   *                       example: "2 hours"
+   *                     coverImage:
+   *                       type: string
+   *                       example: "https://example.com/cover-image.jpg"
+   *                     inclusions:
+   *                       type: array
+   *                       items:
+   *                         type: string
+   *                       example: ["Sound system", "Microphone", "Setup assistance"]
+   *                     createdAt:
+   *                       type: string
+   *                       example: "15 Jan 2024 10:30"
+   *                     updatedAt:
+   *                       type: string
+   *                       example: "15 Jan 2024 10:30"
    *       400:
    *         description: Validation error
    *         content:
@@ -314,6 +441,7 @@ export class CommissionsController {
         amount: updatedCommission.amount,
         duration: updatedCommission.duration,
         inclusions: updatedCommission.inclusions,
+        coverImage: updatedCommission.coverImage,
         createdAt: updatedCommission.createdAt ? dayjs(updatedCommission.createdAt).format('DD MMM YYYY HH:mm') : null,
         updatedAt: updatedCommission.updatedAt ? dayjs(updatedCommission.updatedAt).format('DD MMM YYYY HH:mm') : null,
       };

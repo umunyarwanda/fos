@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional, IsArray, Min, MaxLength } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsArray, Min, MaxLength, IsNotEmpty } from 'class-validator';
 
 export class UpdateCommissionDto {
   @IsOptional()
@@ -23,4 +23,8 @@ export class UpdateCommissionDto {
   @IsArray()
   @IsString({ each: true })
   inclusions?: string[];
+
+  @IsOptional()
+  @IsString()
+  coverImage?: string;
 }
