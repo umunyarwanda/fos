@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000/api';
+export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api' : 'https://api.fos.com/api';
 
 export const EVENTS_URL = {
   BASE: `/api/events`,

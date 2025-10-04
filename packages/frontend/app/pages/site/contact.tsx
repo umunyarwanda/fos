@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { Mail, Phone, MapPin, Clock, Send, Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 import { motion, useInView } from 'framer-motion'
+import { toast } from 'sonner'
 import HeroCrumb from '~/components/HeroCrumb'
+import { contactsApi } from '~/services/contactsApi'
 import type { Route } from '../+types'
 
 export function meta({}: Route.MetaArgs) {
@@ -28,9 +30,9 @@ export default function Contact() {
 
   // Form state
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     subject: '',
     message: ''
   })
@@ -47,20 +49,72 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Basic validation
+    if (!formData.fullName || !formData.email || !formData.subject || !formData.message) {
+      toast.error('Please fill in all required fields', {
+        description: 'Full name, email, subject, and message are required.',
+        duration: 3000,
+      })
+      return
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Invalid email format', {
+        description: 'Please enter a valid email address.',
+        duration: 3000,
+      })
+      return
+    }
+    
     setIsSubmitting(true)
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      alert('Thank you for your message! We will get back to you soon.')
+    // Show loading toast
+    const loadingToast = toast.loading('Sending your message...', {
+      description: 'Please wait while we process your contact form.',
+    })
+    
+    try {
+      // Prepare data for API
+      const contactData = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber || undefined, // Make optional if empty
+        subject: formData.subject,
+        message: formData.message
+      }
+
+      // Submit to API
+      await contactsApi.createContact(contactData)
+      
+      // Dismiss loading toast and show success
+      toast.dismiss(loadingToast)
+      toast.success('Message sent successfully!', {
+        description: 'Thank you for contacting us. We will get back to you soon.',
+        duration: 5000,
+      })
+      
+      // Reset form
       setFormData({
-        name: '',
+        fullName: '',
         email: '',
-        phone: '',
+        phoneNumber: '',
         subject: '',
         message: ''
       })
-    }, 2000)
+    } catch (error) {
+      // Dismiss loading toast and show error
+      toast.dismiss(loadingToast)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send message'
+      toast.error('Failed to send message', {
+        description: errorMessage,
+        duration: 5000,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -126,14 +180,14 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
                         Full Name *
                       </label>
                       <input
                         type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
@@ -159,14 +213,14 @@ export default function Contact() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label htmlFor="phoneNumber" className="block text-sm font-semibold text-gray-700 mb-2">
                         Phone Number
                       </label>
                       <input
                         type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
                         placeholder="+250 788 123 456"
@@ -176,22 +230,16 @@ export default function Contact() {
                       <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
                         Subject *
                       </label>
-                      <select
+                      <input
+                        type="text"
                         id="subject"
                         name="subject"
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
-                      >
-                        <option value="">Select a subject</option>
-                        <option value="booking">Event Booking</option>
-                        <option value="join">Join the Choir</option>
-                        <option value="general">General Inquiry</option>
-                        <option value="support">Support</option>
-                        <option value="media">Media & Press</option>
-                        <option value="other">Other</option>
-                      </select>
+                        placeholder="Enter your subject"
+                      />
                     </div>
                   </div>
 

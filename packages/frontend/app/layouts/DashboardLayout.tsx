@@ -20,7 +20,8 @@ import {
   Play,
   CalendarDays,
   CalendarCheck,
-  DollarSign
+  DollarSign,
+  Mail
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from '~/assets/logo-dark.png'
@@ -42,6 +43,7 @@ function DashboardLayout() {
     { name: 'Commissions', href: '/dashboard/commissions', icon: DollarSign },
     { name: 'Videos', href: '/dashboard/videos', icon: Play },
     { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
+    { name: 'Contacts', href: '/dashboard/contacts', icon: Mail },
     { name: 'Settings', href: '/dashboard/settings', icon: Settings },
   ]
 

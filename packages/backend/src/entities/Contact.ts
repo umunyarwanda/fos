@@ -1,3 +1,4 @@
+import { EContactStatus } from '../shared/enum/EContactStatus.enum';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -16,12 +17,7 @@ export enum ContactSubject {
   OTHER = 'other',
 }
 
-export enum ContactStatus {
-  NEW = 'new',
-  IN_PROGRESS = 'in_progress',
-  RESPONDED = 'responded',
-  CLOSED = 'closed',
-}
+
 
 @Entity('contacts')
 export class Contact {
@@ -37,7 +33,7 @@ export class Contact {
   @Column({ type: 'varchar', length: 20, nullable: true })
   phoneNumber?: string;
 
-  @Column()
+  @Column({ nullable: true })
   subject!: string;
 
   @Column({ type: 'text' })
@@ -45,10 +41,10 @@ export class Contact {
 
   @Column({ 
     type: 'enum', 
-    enum: ContactStatus,
-    default: ContactStatus.NEW 
+    enum: EContactStatus,
+    default: EContactStatus.NEW 
   })
-  status!: ContactStatus;
+  status!: EContactStatus;
 
   @Column({ type: 'text', nullable: true })
   adminNotes?: string;

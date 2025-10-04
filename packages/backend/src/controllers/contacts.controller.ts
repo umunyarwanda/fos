@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../config/database';
-import { Contact, ContactStatus, ContactSubject } from '../entities/Contact';
+import { Contact } from '../entities/Contact';
 import { ICreateContactReqDto } from '../shared/interfaces/contacts/request/ICreateContactReqDto';
 import { IUpdateContactReqDto } from '../shared/interfaces/contacts/request/IUpdateContactReqDto';
 import { IGetContactResDto } from '../shared/interfaces/contacts/response/IGetContactResDto';

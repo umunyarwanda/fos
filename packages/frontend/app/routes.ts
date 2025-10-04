@@ -28,6 +28,7 @@ export default [
     route("/dashboard/analytics", "pages/dashboard/analytics.tsx"),
     route("/dashboard/settings", "pages/dashboard/settings.tsx"),
     route("/dashboard/special-programs", "pages/dashboard/special-programs.tsx"),
-    route("/dashboard/commissions", "pages/dashboard/commissions.tsx")
+    route("/dashboard/commissions", "pages/dashboard/commissions.tsx"),
+    route("/dashboard/contacts", "pages/dashboard/contacts.tsx")
   ])
 ] satisfies RouteConfig;

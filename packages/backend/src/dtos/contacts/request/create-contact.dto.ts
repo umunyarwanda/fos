@@ -1,5 +1,4 @@
 import { IsString, IsEmail, IsOptional, IsEnum, MaxLength, MinLength } from 'class-validator';
-import { ContactSubject } from '../../../entities/Contact';
 
 export class CreateContactDto {
   @IsString()
@@ -16,8 +15,10 @@ export class CreateContactDto {
   @MaxLength(20, { message: 'Phone number must not exceed 20 characters' })
   phoneNumber?: string;
 
-  @IsEnum(ContactSubject, { message: 'Please select a valid subject' })
-  subject!: ContactSubject;
+  @IsOptional()
+  @IsString()
+  @MaxLength(255, { message: 'Subject must not exceed 255 characters' })
+  subject?: string;
 
   @IsString()
   @MinLength(10, { message: 'Message must be at least 10 characters' })

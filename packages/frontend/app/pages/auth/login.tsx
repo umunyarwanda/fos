@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Eye, EyeOff, Mail, Lock, ArrowRight, Music, Users, Award } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router'
+import { toast } from 'sonner'
 import Logo from '~/assets/logo-dark.png'
 import CoverImage1 from '~/assets/cover-image1.png'
 import { useAuth } from '~/contexts/AuthContext'
@@ -21,7 +22,6 @@ export default function Login() {
     password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState('')
 
   // Redirect if already authenticated
   if (isAuthenticated) {
@@ -36,15 +36,57 @@ export default function Login() {
       [name]: value
     }))
   }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
+    
+    // Basic validation
+    if (!formData.email || !formData.password) {
+      toast.error('Please fill in all fields', {
+        description: 'Email and password are required.',
+        duration: 3000,
+      })
+      return
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Invalid email format', {
+        description: 'Please enter a valid email address.',
+        duration: 3000,
+      })
+      return
+    }
+    
+    // Show loading toast
+    const loadingToast = toast.loading('Signing you in...', {
+      description: 'Please wait while we authenticate your credentials.',
+    })
+    
+    // Set a timeout to dismiss the loading toast as a fallback
+    const timeoutId = setTimeout(() => {
+      toast.dismiss(loadingToast)
+    }, 10000) // 10 second timeout
     
     try {
       await login(formData)
+      
+      // Clear timeout and dismiss loading toast
+      clearTimeout(timeoutId)
+      toast.dismiss(loadingToast)
+      toast.success('Welcome back!', {
+        description: 'You have been successfully logged in.',
+        duration: 4000,
+      })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed. Please try again.')
+      // Clear timeout and dismiss loading toast
+      clearTimeout(timeoutId)
+      toast.dismiss(loadingToast)
+      const errorMessage = err instanceof Error ? err.message : 'Login failed. Please try again.'
+      toast.error('Login Failed', {
+        description: errorMessage,
+        duration: 5000,
+      })
     }
   }
 
@@ -154,13 +196,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Error Message */}
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                {error}
-              </div>
-            )}
-
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -202,7 +237,6 @@ export default function Login() {
                 </>
               )}
             </motion.button>
-
             {/* Sign Up Link */}
             <div className="text-center">
               <p className="text-sm text-gray-600">

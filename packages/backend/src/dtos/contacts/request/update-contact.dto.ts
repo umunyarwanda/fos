@@ -1,5 +1,5 @@
+import { EContactStatus } from '../../../shared/enum/EContactStatus.enum';
 import { IsString, IsEmail, IsOptional, IsEnum, MaxLength, MinLength } from 'class-validator';
-import { ContactSubject, ContactStatus } from '../../../entities/Contact';
 
 export class UpdateContactDto {
   @IsOptional()
@@ -19,8 +19,9 @@ export class UpdateContactDto {
   phoneNumber?: string;
 
   @IsOptional()
-  @IsEnum(ContactSubject, { message: 'Please select a valid subject' })
-  subject?: ContactSubject;
+  @IsString()
+  @MaxLength(255, { message: 'Subject must not exceed 255 characters' })
+  subject?: string;
 
   @IsOptional()
   @IsString()
@@ -29,8 +30,8 @@ export class UpdateContactDto {
   message?: string;
 
   @IsOptional()
-  @IsEnum(ContactStatus, { message: 'Please select a valid status' })
-  status?: ContactStatus;
+  @IsEnum(EContactStatus, { message: 'Please select a valid status' })
+  status?: EContactStatus;
 
   @IsOptional()
   @IsString()

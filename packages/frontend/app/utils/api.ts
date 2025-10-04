@@ -2,8 +2,9 @@
 import type { IResponseDto } from '@shared/interfaces/IResponseDto'
 import type { ILoginResDto } from '@shared/interfaces/auth/response/ILoginResDto'
 import type { IRegisterResDto } from '@shared/interfaces/auth/response/IRegisterResDto'
+import { BASE_URL } from '@shared/variables/urls'
 
-const API_BASE_URL = 'http://localhost:3000/api'
+const API_BASE_URL = BASE_URL
 
 export class ApiError extends Error {
   constructor(
